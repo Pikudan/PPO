@@ -39,4 +39,39 @@ reward = np.cos(theta) * (1 - dtheta**2) - max(dtheta * theta, 0.0)
 
 Итоговый вариант выглядит так:
 
-##Эксперименты
+
+## Установка
+
+Настройка виртуального окружения
+```bash
+virtualenv -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Программа
+```
+Контент репозитория
+```bash
+- main
+- video # записи игр
+- weight # записи игр
+```
+Контент файлов (ветка main)
+```bash
+- main.py
+- train.py # train
+- test.py # inference 
+- envs.py # environment
+- agent.py # PPO agent
+- network.py # Policy and Value Network
+- runners.py # run game in environment
+- utils
+  - AsArray # transform to ndarray
+  - Policy # Policy PPO
+  - GAE # Generalized Advantage Estimator
+  - TrajectorySampler # samples minibatch
+  - NormalizeAdvantages # normalize advantages
+  - make_ppo_runner # create runner
+  - evaluate # play games on inference
+```
