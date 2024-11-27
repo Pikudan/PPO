@@ -3,8 +3,6 @@ import mujoco
 import mujoco.viewer
 from typing import Any, Callable, Optional, Union
 import gymnasium as gym
-from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecEnv
-from stable_baselines3.common.vec_env.patch_gym import _patch_env
 from gymnasium.spaces import Box
 
 import gymnasium as gym
