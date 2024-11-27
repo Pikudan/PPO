@@ -43,7 +43,7 @@
 - раскручивание в нижний точках(приложение силы и достижение нужной скорости для подъема)  
 - стабилизацию при раскручивании в верхней точке
 
-Начнем с первого пункта. В похожих окружениях агент получает награду, если удерживает объект в пределах 0.2 радиан(угол с вертикалью). Используем самое простое - косинус. Для размещения около таргета используем поощрение -  функцию от нормы расстояния от центра текущей системы координат(таргета или начала координат).
+Начнем с первого пункта. В похожих окружениях агент получает награду, если удерживает объект в пределах 0.2 радиан(угол с вертикалью). Используем самое простое - косинус. Для размещения около таргета используем поощрение/штраф -  функцию от нормы расстояния от центра текущей системы координат(таргета или начала координат).
 
 ```python
 relative_posistion_cart = x - target + np.sin(theta) * len_pole
@@ -55,6 +55,10 @@ reward = np.cos(theta) + np.exp(-np.abs(relative_posistion_cart))
 
 ```python
 reward = np.cos(theta) + np.exp(-np.abs(relative_posistion_cart)) * (relative_posistion_cart) < 0.1)
+```
+
+```python
+reward = np.cos(theta) + 1 - np.abs(relative_posistion_cart)
 ```
 
 Для чего начали с этой модели? Для того чтобы:
@@ -77,6 +81,28 @@ reward = np.cos(theta) - max(dtheta * theta, 0.0)
 ```
 
 Итоговый вариант функции награды после проведения экспериментов выглядит так:
+
+def get_reward(x, theta, dx, dtheta, target, a, extented_observation, len_pole=0.6):
+    if extented_observation:
+        pos_cart = np.sin(theta) * len_pole + x - target
+    else:
+        pos_cart = np.sin(theta) * len_pole + x
+        
+    if abs(ob[1]) < 0.2:
+        # поощрение в ограниченной области
+        reward = np.cos(theta) + np.exp(-np.abs(relative_posistion_cart)) * (np.abs(relative_posistion_cart) < 0.1)
+        
+        # поощрение везде
+        # reward = np.cos(theta) + np.exp(-np.abs(relative_posistion_cart))
+        
+        # штраф за отдаление
+        # reward = np.cos(theta) + 1 - np.abs(relative_posistion_cart)
+    elif abs(ob[1]) < np.pi / 2:
+        # больше нуля при подьеме, меньше нуля при опускании
+        reward = np.cos(theta) - max(dtheta * theta, 0.0)
+    else:
+        reward = np.clip(-theta**2 + 0.1 * dtheta**2 + 0.001 * a**2 , -np.pi**2, 0.0)
+    return reward
 
 ### Дополнительные параметры
 
