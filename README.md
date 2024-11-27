@@ -105,6 +105,7 @@ def get_reward(x, theta, dx, dtheta, target, a, extented_observation, len_pole=0
     else:
         reward = np.clip(-theta**2 + 0.1 * dtheta**2 + 0.001 * a**2 , -np.pi**2, 0.0)
     return reward
+```
 
 ### Дополнительные параметры
 
