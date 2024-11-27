@@ -83,6 +83,7 @@ reward = np.cos(theta) - max(dtheta * theta, 0.0)
 
 Итоговый вариант функции награды после проведения экспериментов выглядит так:
 
+```python
 def get_reward(x, theta, dx, dtheta, target, a, extented_observation, len_pole=0.6):
     if extented_observation:
         pos_cart = np.sin(theta) * len_pole + x - target
