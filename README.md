@@ -209,7 +209,7 @@ mjpython main.py --mode=train --upswing=True --extended_observation=True
 
 Для тестирования:
 ```bash
-mjpython main.py --mode=test --upswing=True --extended_observation=True --policy_model=policy.pth --value_model=value.ptр
+mjpython main.py --mode=test --upswing=True --extended_observation=True --policy_model=ppo_policy.pth --value_model=ppo_value.pth
 ```
 
 ```bash
