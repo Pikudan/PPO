@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 
+
 class PPO:
     def __init__(self, policy, optimizer,
                    cliprange=0.2,
@@ -33,7 +34,6 @@ class PPO:
         self.values_loss_np = torch.mean(torch.max(L_simple, L_clipped)).detach().numpy()
         return torch.mean(torch.max(L_simple, L_clipped))
     
-      
     def loss(self, trajectory):
         act = self.policy.act(trajectory["observations"], training=True)
         policy_loss = self.policy_loss(trajectory, act)
