@@ -41,8 +41,8 @@ def test(
     time.sleep(2.0)
     while env.current_time < 5000:
         if env.current_time - last_update > 5:
-            target_pos = [np.random.rand() - 0.5, 0, 0.65]
-            env.draw_ball(target_pos, radius=0.01)
+            target_pos = [np.random.rand() - 0.5, 0, 0.6]
+            env.draw_ball(target_pos, radius=0.05)
             last_update = env.current_time
         s = torch.tensor(s, dtype=torch.float32)
         (mus, sigmas), _ = model(s)
