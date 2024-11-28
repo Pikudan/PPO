@@ -168,11 +168,11 @@ Cледующий
 
 Контент репозитория
 ```bash
-- main
+- run
 - video # video of games
 - weight # weights of models
 ```
-Контент файлов (ветка main)
+Контент файлов (ветка run)
 ```bash
 - main.py
 - train.py   # train
